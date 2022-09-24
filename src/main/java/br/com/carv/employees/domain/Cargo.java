@@ -18,7 +18,19 @@ public class Cargo extends AbstractEntity {
     @OneToMany(mappedBy = "cargo")
     private List<Funcionario> funcionarios;
 
+    public Cargo() {
+        
+    }
+
     public Cargo(String nome) {
+        this.nome = nome;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
