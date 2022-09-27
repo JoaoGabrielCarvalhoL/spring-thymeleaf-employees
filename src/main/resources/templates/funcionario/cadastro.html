@@ -27,7 +27,10 @@
 				<div th:replace="fragments/alert"></div>
 
 	            <form th:action="${funcionario.id == null} ? @{/funcionarios/salvar} : @{/funcionarios/editar}" th:object="${funcionario}"  method="POST">
-	                <div class="form-row">
+	                
+					<div th:replace="fragments/validacao :: validacao"></div>	
+
+					<div class="form-row">
 	                    <div class="form-group col-md-6">
 	                        <label for="nome">Nome do Funcionário</label>
 	                        <input type="text" class="form-control" id="nome" placeholder="Nome Completo"

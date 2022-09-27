@@ -4,25 +4,35 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Endereco extends AbstractEntity {
     
+    @NotBlank(message = "O nome do logradouro é obrigatório.")
+    @Size(max = 80, message = "O logradouro do logradouro deve conter no máximo {max} caracteres.")
     @Column(nullable = false)
     private String logradouro;
 
+    @NotBlank(message = "O nome do bairro é obrigatório.")
+    @Size(max = 60, min = 3, message = "O nome do bairro deve ter entre {min} e {max} caracteres.")
     @Column(nullable = false)
     private String bairro; 
 
+    @NotBlank(message = "O nome da cidade é obrigatório.")
+    @Size(max = 60, min = 3, message = "O nome do cidade deve ter entre {min} e {max} caracteres.")
     @Column(nullable = false)
     private String cidade;
 
     @Enumerated(EnumType.STRING)
     private UF uf;
 
+    @NotBlank(message = "O cep é obrigatório.")
     @Column(nullable = false, length = 9)
     private String cep;
 
+    @NotBlank(message = "O número é obrigatório.")
     @Column(nullable = false, length = 10)
     private String numero;
 

@@ -8,6 +8,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
@@ -17,6 +21,9 @@ import org.springframework.format.annotation.NumberFormat.Style;
 @Entity
 public class Funcionario extends AbstractEntity {
 
+
+    @NotBlank(message = "O nome do funcionário é obrigatório.")
+    @Size(max = 100, min = 3, message = "O nome do funcionário deve ter entre {min} e {max} caracteres.")
     @Column(unique = true, nullable = false)
     private String nome;
 
@@ -32,9 +39,12 @@ public class Funcionario extends AbstractEntity {
     @Column(columnDefinition = "DATE")
     private LocalDate dataDemissao;
 
+    @Valid
+    @NotNull
     @OneToOne(cascade = CascadeType.ALL)
     private Endereco endereco;
 
+    @NotNull(message = "Selecione o cargo relativo ao funcionário.")
     @ManyToOne
     private Cargo cargo; 
 

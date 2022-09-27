@@ -5,13 +5,20 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Cargo extends AbstractEntity {
+
     
+    @NotBlank(message = "O nome do cargo é obrigatório.")
+    @Size(max = 60, message = "O nome do departamento deve conter no máximo {max} caracteres.")
     @Column(nullable = false, length = 100, unique = true)
     private String nome; 
 
+    @NotNull(message = "Selecione o departamento relativo ao cargo.")
     @ManyToOne
     private Departamento departamento;
 
