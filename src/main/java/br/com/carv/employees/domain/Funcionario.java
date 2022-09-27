@@ -9,18 +9,26 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+import org.springframework.format.annotation.NumberFormat.Style;
+
 @Entity
 public class Funcionario extends AbstractEntity {
 
     @Column(unique = true, nullable = false)
     private String nome;
 
+    @NumberFormat(style = Style.CURRENCY, pattern = "#,##0.00")
     @Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
     private BigDecimal salario; 
 
+    @DateTimeFormat(iso = ISO.DATE)
     @Column(nullable = false, columnDefinition = "DATE")
     private LocalDate dataAdmissao;
 
+    @DateTimeFormat(iso = ISO.DATE)
     @Column(columnDefinition = "DATE")
     private LocalDate dataDemissao;
 
@@ -79,5 +87,13 @@ public class Funcionario extends AbstractEntity {
 
     public void setCargo(Cargo cargo) {
         this.cargo = cargo;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 }
